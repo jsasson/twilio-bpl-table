@@ -80,7 +80,7 @@ def checkTable():
 		
 	resp = twilio.twiml.Response()
 	resp.message(message)
-	return str(message)
+	return str(resp)
 
 if __name__ == "__main__":
 	app.run(debug=True)
