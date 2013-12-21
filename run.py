@@ -44,8 +44,8 @@ teamNames = {
 def checkTable():
          
     # Parse the text message and normalize the string to check against our dictionary
-    # team = request.values.get('Body', None)
-    team = "Arsenal"
+    team = request.values.get('Body', None)
+    # team = "Arsenal"
     teamCheck = "".join(team.split()).lower()
 
     if teamCheck in teamNames:
@@ -75,11 +75,11 @@ def checkTable():
     else:
         message = "We couldn't find the team you were looking for, please try again with a more common name"
  
-    #resp = twilio.twiml.Response()
-    #resp.message(message)
+    resp = twilio.twiml.Response()
+    resp.message(message)
  
-    print message
+    # print message
  
 if __name__ == "__main__":
-    checkTable()
-    #app.run(debug=True)
+    # checkTable()
+    app.run(debug=True)
