@@ -59,7 +59,7 @@ def checkTable():
 		# Match found in dictionary, Query API for place in table        
 		tableAPIConnection = httplib.HTTPSConnection('api.statsfc.com')
 		tableAPIConnection.connect()
-		tableAPIConnection.request('GET','/table.json?key=yp1ASodhq3Hl52vkRKZClwNHyHIADzhR0i9ywCoX&competition=premier-league')
+		tableAPIConnection.request('GET','/table.json?key=[YOUR_KEY_HERE]&competition=premier-league')
 		response = tableAPIConnection.getresponse()
 		
 		if response.status == httplib.OK:
