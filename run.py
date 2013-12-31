@@ -49,7 +49,7 @@ def checkTable():
 		resp = twilio.twiml.Response()
 		message = "We couldn't find the team you were looking for, please try again with a more common name."
 		resp.message(message)
-		return str(message)
+		return str(resp)
 	
 	teamCheck = "".join(team.split()).lower()
 	
@@ -63,7 +63,7 @@ def checkTable():
 		if response.status == httplib.OK:
 			table = json.load(response)
 			
-			tablePlace = (item for item in table if (item['team'] == teamNames[teamCheck])).next()
+			tablePlace = next((item for item in table if (item['team'] == teamNames[teamCheck])),None)
 			
 			if tablePlace != None:
 				message = "{name} currently stand in position {position} in this season of the Premier League.".format(name=tablePlace['team'], position=tablePlace['position'])
