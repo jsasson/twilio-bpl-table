@@ -5,6 +5,7 @@ import json
  
 app = Flask(__name__) 
 
+# Create dictionary of possible team values
 teamNames = {
     "liverpool":"Liverpool",
     "mancity":"Manchester City",
@@ -45,6 +46,7 @@ def checkTable():
 	# Parse the text message and normalize the string to check against our dictionary
 	team = request.values.get('Body', None)
 	
+	# If the body is empty, alert the user
 	if team == None:
 		resp = twilio.twiml.Response()
 		message = "We couldn't find the team you were looking for, please try again with a more common name."
@@ -54,7 +56,7 @@ def checkTable():
 	teamCheck = "".join(team.split()).lower()
 	
 	if teamCheck in teamNames:
-		# Query API for place in table        
+		# Match found in dictionary, Query API for place in table        
 		tableAPIConnection = httplib.HTTPSConnection('api.statsfc.com')
 		tableAPIConnection.connect()
 		tableAPIConnection.request('GET','/table.json?key=yp1ASodhq3Hl52vkRKZClwNHyHIADzhR0i9ywCoX&competition=premier-league')
@@ -70,12 +72,13 @@ def checkTable():
 			else:
 				message = "We could not find this team's place in the table, please try again later."
 						
-		else:
+		else:			
 			message = "We were unable to retrieve the table, please try again later."
 						
 		tableAPIConnection.close()
 	
 	else:
+		# No match in dictionary
 		message = "We couldn't find the team you were looking for, please try again with a more common name."
 		
 	resp = twilio.twiml.Response()
